@@ -1,0 +1,28 @@
+.timeline-link {
+  flex: 1 1 auto;
+  position: absolute;
+  top: 8px;
+  width: 100%;
+  left: calc(-70%);
+  right: calc(70%);
+}
+
+.dropdown-options {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.show-dropdown-options .dropdown-options {
+  opacity: 1;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+.custom-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
