@@ -14,15 +14,33 @@ export { default as HomePage } from './homePage'
 
 // Super Admin's Pages
 export { default as SuperAdminOnBoardingPage } from './dashboards/superAdmin/superAdminOnBoardingPage'
-export { default as SuperAdminDashboard, loader as SuperAdminDashboardLoader } from './dashboards/superAdmin/superAdminDashboard'
+export {
+  default as SuperAdminDashboard,
+  loader as SuperAdminDashboardLoader,
+} from './dashboards/superAdmin/superAdminDashboard'
 export {
   default as ApprovalPage,
   loader as ApprovalPageLoader,
 } from './dashboards/superAdmin/approvalPage'
+export {
+  default as Blogs,
+  loader as BlogsLoader,
+} from './dashboards/superAdmin/blogs'
+export {
+  default as CreateBlogs,
+  action as createBlogsAction,
+} from './dashboards/superAdmin/blogs/createBlogs'
+export {
+  default as EditBlogs,
+  action as editBlogsAction,
+} from './dashboards/superAdmin/blogs/editBlogs'
 
 // Creator's Pages
 export { default as CreatorOnBoardingPage } from './dashboards/creators/creatorOnBoardingPage'
-export { default as CreatorDashboardPage, loader as CreatorDashboardPageLoader  } from './dashboards/creators/creatorDashboardPage'
+export {
+  default as CreatorDashboardPage,
+  loader as CreatorDashboardPageLoader,
+} from './dashboards/creators/creatorDashboardPage'
 export {
   default as DiscoverCampaign,
   loader as discoverCampaignLoader,
@@ -32,15 +50,33 @@ export {
   creatorProfileLoader,
 } from './dashboards/creators/creatorProfilePage'
 export { default as CreatorCustomLink } from './dashboards/creators/creatorCustomLink' // main
-export { default as RequestsPage, loader as RequestsPageLoader } from './dashboards/creators/requestsPage' 
-export { default as SearchCreatorLinkTreePage, action as SearchCreatorLinkTreePageAction } from './dashboards/creators/searchCreatorLinkTreePage'; 
-export { default as ResourcesPage } from './dashboards/creators/resourcesPage'; 
-export { default as Invoices, loader as InvoicesLoader } from './dashboards/creators/invoice'; 
-export { default as CreateInvoice, action as CreatorInvoiceAction } from './dashboards/creators/invoice/createInvoice'; 
-export { default as ShowInvoice, loader as ShowInvoiceLoader } from './dashboards/creators/invoice/showInvoice'; 
+export {
+  default as RequestsPage,
+  loader as RequestsPageLoader,
+} from './dashboards/creators/requestsPage'
+export {
+  default as SearchCreatorLinkTreePage,
+  action as SearchCreatorLinkTreePageAction,
+} from './dashboards/creators/searchCreatorLinkTreePage'
+export { default as ResourcesPage, loader as ResourcesPageLoader } from './dashboards/creators/resourcesPage'
+export {
+  default as Invoices,
+  loader as InvoicesLoader,
+} from './dashboards/creators/invoice'
+export {
+  default as CreateInvoice,
+  action as CreatorInvoiceAction,
+} from './dashboards/creators/invoice/createInvoice'
+export {
+  default as ShowInvoice,
+  loader as ShowInvoiceLoader,
+} from './dashboards/creators/invoice/showInvoice'
 
 // Brand or Agency's Pages
-export { default as BrandOrAgencyDashboard, loader as BrandOrAgencyDashboardLoader } from './dashboards/brandOrAgency/brandOrAgencyDashboard'
+export {
+  default as BrandOrAgencyDashboard,
+  loader as BrandOrAgencyDashboardLoader,
+} from './dashboards/brandOrAgency/brandOrAgencyDashboard'
 export { default as BrandOrAgencyOnBoardingPage } from './dashboards/brandOrAgency/brandOrAgencyOnBoardingPage'
 export { default as CreateBrandCampaign } from './dashboards/brandOrAgency/campaign/multi/createBrandCampaign'
 export { default as CreateSingleBrandCampaign } from './dashboards/brandOrAgency/campaign/single/createSingleCreatorCampaign'

@@ -20,6 +20,7 @@ import {
   InvoicesLoader,
   CreatorDashboardPageLoader,
   SupportPage,
+  ResourcesPageLoader,
 } from '../pages'
 
 export const CreatorRoutes = (
@@ -52,6 +53,7 @@ export const CreatorRoutes = (
       path="resources"
       element={<ResourcesPage />}
       action={SearchCreatorLinkTreePageAction}
+      loader={ResourcesPageLoader}
     />
     <Route path="invoice" element={<Outlet />}>
       <Route index element={<Invoices />} loader={InvoicesLoader} />

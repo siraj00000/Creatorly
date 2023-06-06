@@ -1,4 +1,4 @@
-import { Form, NavLink, useLocation } from 'react-router-dom'
+import { Form, NavLink, useLocation, useSubmit } from 'react-router-dom'
 import { signUpInputPropertiesList } from '../../constants/signupInputProperies'
 import ErrorAlert from '../alerts/errorAlert'
 import SuccessAlert from '../alerts/successAlert'
@@ -14,6 +14,7 @@ type Props = {
 }
 
 const UserRegisterationForm = (props: Props) => {
+  const submit = useSubmit()
   const { pathname } = useLocation()
   const [inputList, setInputList] = useState(signUpInputPropertiesList)
 
@@ -27,11 +28,21 @@ const UserRegisterationForm = (props: Props) => {
 
     setInputList(signUpInputsList)
   }
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // make formData instance with currentTarget
+    const formData = new FormData(e.currentTarget)
+    submit(formData, {
+      action: `/signup/${pathname.split('/')[2]}`,
+      method: 'post',
+    })
+  }
+
+  let userName = props.creatorLink ? props.creatorLink.split('/')[3] : ''
   return (
     <Form
-      method="post"
-      action={`/signup/${pathname.split('/')[2]}`}
       className="w-full max-w-lg mx-auto pt-10 px-4"
+      onSubmit={handleRegister}
     >
       <h4 className="text-4xl font-semibold text-main mb-8">
         Sign up to Creatorly.
@@ -51,9 +62,11 @@ const UserRegisterationForm = (props: Props) => {
                 {input.label}
               </label>
               <input
+                disabled={input.name === 'userName'}
                 className="appearance-none block w-full  bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 type={input.type}
                 name={input.name}
+                defaultValue={input.name === 'userName' ? userName : ''}
                 placeholder={input.placeholder}
               />
               {input.name === 'password' && (

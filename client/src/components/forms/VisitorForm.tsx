@@ -9,8 +9,8 @@ const VisitorForm: React.FC<VisitorFormProps> = ({ errorMessage }) => {
     <Form action="/creator-search" method="post" className="flex w-full mt-10">
       <input
         type="text"
-        name="instagram_link"
-        placeholder="instagram.com/username"
+        name="username"
+        placeholder="username"
         className={`${
           errorMessage ? 'border-red-600' : 'border-gray-400'
         } p-3 px-10 border border-r-0 rounded-l-2xl w-full h-20 text-lg italic text-black font-medium`}

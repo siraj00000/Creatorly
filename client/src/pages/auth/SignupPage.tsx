@@ -8,7 +8,7 @@ import UserRegisterationForm from '../../components/forms/RegisterForm'
 import { handleInsertAction } from '../../utils/api'
 import { ApiErrorResponse, ApiResponse } from '../../types/response.types'
 import Cookies from 'js-cookie'
-import { decryptData } from '../../utils/encryption'
+import { decryptData, encryptData } from '../../utils/encryption'
 
 const UserSignup = () => {
   const { state } = useLocation()
@@ -60,6 +60,11 @@ export async function action({ request, params }: ActionFunctionArgs) {
       sessionStorage.setItem('_cttkn', token) // saving token in session
       Cookies.set('__cretorly', response.data.user.role) // saving user role in cookie
       Cookies.set('__cretorty', response.data.user.userType) // saving user type in cookie
+
+      if (response.data.userLink) {
+        let userLink = encryptData({ data: response.data.userLink })
+        Cookies.set('CATCH_CRET', userLink)
+      }
     }
     let navTo
     let isSingleCreator = sessionStorage.getItem('_#@ena')

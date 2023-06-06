@@ -17,8 +17,9 @@ import {
 } from '../../../types/others.types'
 import DatePicker from '../../../components/other/datePicker'
 import Cookies from 'js-cookie'
-import { MdOutlineCreate, MdPersonSearch } from 'react-icons/md'
-
+import { decryptData } from '../../../utils/encryption'
+import { BsArrowUpRightCircleFill } from 'react-icons/bs'
+import { useMemo } from 'react'
 /***
  * Plan
  *    top @graphs Creators Onboarded, Brands and Agencies Onboarded, Total Campaigns
@@ -85,24 +86,36 @@ const InfluencerStatistics = ({
 /**
  * A component that render a section for Feature buttons
  * */
-const CreatorFeature = () => (
-  <section className="flex items-center max-md:w-full w-1/2 gap-5 my-10">
-    <NavLink
-      to="creator-custom-link"
-      className="flex items-center justify-center gap-2 max-md:flex-1 px-5 py-2 rounded-md border border-ligth hover:shadow-xl font-light"
-    >
-      <MdOutlineCreate size={20} />
-      claim custom link
-    </NavLink>
-    <NavLink
-      to="discover"
-      className="flex items-center justify-center gap-2 max-md:flex-1 px-5 py-2 rounded-md border border-ligth hover:shadow-xl font-light"
-    >
-      <MdPersonSearch size={20} />
-      Discover Creator
-    </NavLink>
-  </section>
-)
+const CreatorFeature = () => {
+  const generateLink = () => {
+    let _link
+    const CATCH_CRET = Cookies.get('CATCH_CRET')
+    if (CATCH_CRET) {
+      _link = decryptData(CATCH_CRET!)
+    } else {
+      _link = ''
+    }
+
+    return _link
+  }
+  let userLink = useMemo(() => generateLink(), [])
+  return (
+    <section className="flex items-center max-md:w-full w-1/2 gap-5 my-10">
+      <NavLink
+        title="claim custom link"
+        to="creator-custom-link"
+        className="flex items-center justify-center gap-4 max-md:flex-1 px-5 py-2 rounded-md border-ligth hover:shadow-xl border-main border-2 border-l-8 font-light"
+      >
+        <span>
+          creatorly.in/@
+          <strong className="font-semibold">{userLink}</strong>
+        </span>
+
+        <BsArrowUpRightCircleFill />
+      </NavLink>
+    </section>
+  )
+}
 
 /**
  * A component that render a section for charts

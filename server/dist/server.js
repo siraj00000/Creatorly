@@ -22,6 +22,7 @@ import invoiceRouter from './routers/creatorRoutes/invoice.router.js';
 import visitorRouter from './routers/creatorRoutes/visitor.router.js';
 import creatorStatsRouter from './routers/statisticsRoutes/creatorStatistics.router.js';
 import brandStatsRouter from './routers/statisticsRoutes/brandStatistics.router.js';
+import blogRouter from './routers/adminRoutes/blogs.router.js';
 cloudinary.v2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -64,6 +65,7 @@ const startServer = () => {
     });
     /* Routes */
     router.use('/api', userRouter);
+    router.use('/api', blogRouter);
     // brand
     router.use('/api', brandOrAgencyOnlinePresenceRouter);
     router.use('/api', myBrandRouter);

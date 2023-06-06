@@ -6,7 +6,9 @@ import { handleInsertAction } from '../../utils/api'
 import { ApiErrorResponse, ApiResponse } from '../../types/response.types'
 import ErrorAlert from '../alerts/errorAlert'
 import SuccessAlert from '../alerts/successAlert'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
+import { decryptData } from '../../utils/encryption'
+import Cookies from 'js-cookie'
 
 type Props = {}
 
@@ -35,7 +37,7 @@ const CreatorOnlinePresenceForm = (props: Props) => {
       })) as ApiResponse
 
       if (response.data.success) {
-        setStatus({ successMessage: response.data.message, errorMessage: '' });
+        setStatus({ successMessage: response.data.message, errorMessage: '' })
         navigate('/dashboard')
       }
     } catch (error) {
@@ -48,8 +50,10 @@ const CreatorOnlinePresenceForm = (props: Props) => {
       setStatus({ successMessage: '', errorMessage: err.response.data })
     }
   }
+  let CATCH_CRET = Cookies.get('CATCH_CRET')
+  let userLink = CATCH_CRET ? decryptData(CATCH_CRET!) : ""
   return (
-    <form onSubmit={handleSubmit} className='w-full lg:w-1/2'>
+    <form onSubmit={handleSubmit} className="w-full lg:w-1/2">
       <div className="my-4 w-full">
         {/* Alerts */}
         <div className="my-4">
@@ -81,6 +85,8 @@ const CreatorOnlinePresenceForm = (props: Props) => {
               <Icon size={25} className="text-main" />
               <input
                 {...rest}
+                disabled={rest.name === 'instagram'}
+                defaultValue={rest.name === 'instagram' ? userLink?.data : ''}
                 className="appearance-none block w-full h-full rounded text-gray-700 py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               />
             </div>

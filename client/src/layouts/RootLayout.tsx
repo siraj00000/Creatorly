@@ -6,7 +6,7 @@ type Props = {}
 const RootLayout = (props: Props) => {
   const { state } = useNavigation()
 
-  let isLoadingState = state === 'loading' || state === 'submitting'
+  let isLoadingState = state === 'loading'
 
   return isLoadingState ? <PendingUILoader /> : <Outlet />
 }

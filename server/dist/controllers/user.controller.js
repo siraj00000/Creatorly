@@ -55,9 +55,11 @@ class UserController {
             let user = (await User.create(_userInfo));
             const token = user.generateAuthToken();
             // Update visitor registration status if visitor exists and user is a creator
+            let userLink;
             if (_userInfo.userType === 'creator') {
                 const visitor = await Visitor.findOne({ instagramLink: _userInfo.instagramLink });
                 if (visitor) {
+                    userLink = visitor.instagramLink;
                     visitor.registered = true;
                     await visitor.save();
                 }
@@ -66,7 +68,8 @@ class UserController {
                 success: true,
                 msg: 'User Registered!',
                 token,
-                user
+                user,
+                userLink
             });
         }
         catch (error) {

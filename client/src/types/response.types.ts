@@ -4,6 +4,7 @@ export interface ApiResponse {
     token: string;
     message: string;
     userRoute: string;
+    userLink: string;
     user: {
       userName: string;
       phoneNumber: string;

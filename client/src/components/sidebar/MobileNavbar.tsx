@@ -19,7 +19,9 @@ const MobileNavbar: React.FC<Props> = ({ sidebarMenu }) => {
                 isActive
                   ? `bg-main rounded-md text-white`
                   : `text-white hover:text-black`
-              } flex items-center flex-col gap-2 p-1 capitalize flex-1`
+              } items-center flex-col gap-2 p-1 capitalize flex-1
+              ${['profile', 'support'].includes(rest.link) ? 'hidden' : 'flex'}
+              `
             }
           >
             <span className="bg-white shadow rounded-md text-black p-1 text-2xl">

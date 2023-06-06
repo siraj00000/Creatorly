@@ -24,6 +24,11 @@ const dropdownList: DropdownListType[] = [
     to: '/support',
     show: __cretorly ? ['2', '3'].includes(__cretorly) : false,
   },
+  {
+    title: 'Profile',
+    to: '/profile',
+    show: __cretorly ? ['2', '3'].includes(__cretorly) : false,
+  },
 ]
 
 function classNames(...classes: string[]) {

@@ -1,12 +1,19 @@
-import { NavLink } from 'react-router-dom'
+import { Suspense } from 'react'
+import { Await, NavLink, defer, useLoaderData } from 'react-router-dom'
 import { TfiReceipt } from 'react-icons/tfi'
 import { FaFlagCheckered } from 'react-icons/fa'
 import { AiOutlinePlus } from 'react-icons/ai'
-import BlogCard from '../../../components/card/BlogCard'
+// import BlogCard from '../../../components/card/BlogCard'
 import { VscTools } from 'react-icons/vsc'
 import { TbBrandCampaignmonitor } from 'react-icons/tb'
+import { handleFetchAction } from '../../../utils/api'
+import { GetResponse } from '../../../types/response.types'
+import Loader from '../../../components/loader/loader'
+import { BlogTypes } from '../../../constants/blogList'
+import BlogCard from '../../../components/card/BlogCard'
 
 const ResourcesPage = () => {
+  const loaderData = useLoaderData() as { blogs: BlogTypes[] }
   return (
     <main className="p-10 max-md:p-[5%] max-md:pb-20">
       <section className="flex items-center justify-between max-md:flex-col gap-2">
@@ -40,17 +47,19 @@ const ResourcesPage = () => {
         <h1 className="capitalize text-lg font-medium text-black">
           Creatorly Creators Academy
         </h1>
-        <div className="flex overflow-x-auto my-5 custom-scrollbar">
-          <div className="flex items-center justify-between gap-2">
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            {/* Add more BlogCard components as needed */}
-          </div>
-        </div>
+        <Suspense fallback={<Loader />}>
+          <Await resolve={loaderData.blogs} errorElement={<h1>Error</h1>}>
+            {(blogs) => (
+              <div className="flex overflow-x-scroll mt-5 pb-10">
+                <div className="flex items-center space-x-2">
+                  {blogs.map((blog: BlogTypes) => (
+                    <BlogCard {...blog} key={blog._id} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </Await>
+        </Suspense>
       </section>
 
       {/* More */}
@@ -65,7 +74,7 @@ const ResourcesPage = () => {
         </NavLink>
         <NavLink
           aria-disabled={false}
-          to={''}
+          to={'/discover'}
           className={`mt-5 flex-1 flex items-center justify-center text-2xl text-white font-medium bg-main border-2 border-main rounded-md gap-4 p-5`}
         >
           <TbBrandCampaignmonitor size={50} />
@@ -77,3 +86,11 @@ const ResourcesPage = () => {
 }
 
 export default ResourcesPage
+
+export const loader = async () => {
+  const response = (await handleFetchAction({
+    url: `/api/latest-blogs`,
+  })) as GetResponse
+
+  return defer({ blogs: response.data.data })
+}

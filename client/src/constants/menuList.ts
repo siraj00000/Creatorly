@@ -1,4 +1,4 @@
-import { TbBrandCampaignmonitor, TbBrandBumble } from "react-icons/tb";
+import { TbBrandCampaignmonitor, TbBrandBumble, TbBrandBlogger } from "react-icons/tb";
 import { RxDashboard } from "react-icons/rx";
 import { RiCompassDiscoverLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
@@ -18,6 +18,7 @@ type menuListProp = {
 const superAdminMenuList: menuListType[] = [
   { title: "dashboard", link: "/dashboard", Icon: RxDashboard },
   { title: "approvals", link: "/approvals", Icon: MdApproval },
+  { title: "blogs", link: "/blog", Icon: TbBrandBlogger },
 ];
 const creatorMenuList: menuListType[] = [
   { title: "dashboard", link: "dashboard", Icon: RxDashboard },
@@ -48,7 +49,7 @@ const brandMenuList: menuListType[] = [
     Icon: BsPeople,
   },
   {
-    title: "My brands",
+    title: "Brands",
     link: "my-brands",
     Icon: TbBrandBumble,
   },
