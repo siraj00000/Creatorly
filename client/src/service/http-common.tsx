@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const API = axios.create({
-  baseURL: 'http://16.16.172.124/',
+  baseURL: 'https://www.creatorly.in/',
   headers: {
     'Content-type': 'application/json',
   },
